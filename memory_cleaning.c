@@ -28,6 +28,26 @@ void			free_args(t_token *token)
 	}
 }
 
+void			free_name_and_comment(t_data *data)
+{
+	if (data->name)
+	{
+		if (data->name->type)
+			free(data->name->type);
+		if (data->name->content)
+			free(data->name->content);
+		free(data->name);
+	}
+	if (data->comment)
+	{
+		if (data->comment->type)
+			free(data->comment->type);
+		if (data->comment->content)
+			free(data->comment->content);
+		free(data->comment);
+	}
+}
+
 void			free_data(t_data *data)
 {
 	t_token		*token;
@@ -44,10 +64,7 @@ void			free_data(t_data *data)
 		token = token->next;
 		free(tmp);
 	}
-	if (data->name)
-		free(data->name);
-	if (data->comment)
-		free(data->comment);
+	free_name_and_comment(data);
 	if (data->buffer)
 		free(data->buffer);
 	free(data);

@@ -51,5 +51,6 @@ int				compile(char *filename)
 		return (free_and_return(data));
 	if (!make_file(data, filename))
 		return (free_and_return(data));
+	free_data(data);
 	return (1);
 }

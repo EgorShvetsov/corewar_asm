@@ -35,13 +35,13 @@ int			init_buffer(t_data *data)
 	int		len;
 
 	i = 0;
-	len = data->current_byte + PROG_NAME_LENGTH + COMMENT_LENGTH + 16;
+	len = data->current_byte + PROG_NAME_LENGTH + COMMENT_LENGTH + 17;
 	if (!(data->buffer = (unsigned char*)malloc(len)))
 	{
 		ft_putstr_fd(ERROR_MEMORY_ALLOCATION,2);
 		return (0);
 	}
-	while (i <= len)
+	while (i < len)
 		data->buffer[i++] = 0;
 	data->buffer_len = len;
 	return (1);

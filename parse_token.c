@@ -12,6 +12,15 @@
 
 #include "asm.h"
 
+void		free_token_and_content(t_token *token)
+{
+	if (token->type)
+		free(token->type);
+	if (token->content)
+		free(token->content);
+	free(token);
+}
+
 void		delete_token(t_data *data)
 {
 	t_token	*tmp;
@@ -20,7 +29,7 @@ void		delete_token(t_data *data)
 	if (tmp == data->current_token)
 	{
 		data->token = data->token->next;
-		free(tmp);
+		free_token_and_content(tmp);
 		data->current_token = data->token;
 	}
 	else
@@ -28,7 +37,7 @@ void		delete_token(t_data *data)
 		while (tmp->next != data->current_token)
 			tmp = tmp->next;
 		tmp->next = data->current_token->next;
-		free(data->current_token);
+		free_token_and_content(data->current_token);
 		data->current_token = tmp->next;
 	}
 }
